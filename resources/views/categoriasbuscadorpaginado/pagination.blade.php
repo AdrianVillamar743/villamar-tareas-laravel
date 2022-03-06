@@ -69,12 +69,12 @@
   <br>
 
   <div class="container">
-   <h3 align="center">LISTADO DE TAREAS</h3><br />
+   <h3 align="center">LISTADO DE CATEGORIAS</h3><br />
    <div class="row">
   
     <div style= "text-align: center" class="col-md-12">
      <div class="form-group">
-      <input type="text" name="serach" placeholder="Buscador Tareas por nombre" id="serach" class="form-control" />
+      <input type="text" name="serach" placeholder="Buscador Categorias por nombre" id="serach" class="form-control" />
      </div>
     </div>
    </div>

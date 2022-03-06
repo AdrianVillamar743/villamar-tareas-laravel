@@ -65,13 +65,15 @@ $categorias=Categoria::all();
       $sort_type = $request->get('sorttype');
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
-      $data = DB::table('todos')
-                    ->where('title', 'like', '%'.$query.'%')/*
+            $data=DB::table('todos')->addSelect(['todos.id as id_tareas','title','todos.created_at','todos.updated_at','categorias.nombre','categorias.id','todos.id_categoria'])
+            ->join('categorias','categorias.id','=','todos.id_categoria')        
+            ->where('title', 'like', '%'.$query.'%')/*
                     ->orWhere('post_title', 'like', '%'.$query.'%')
                     ->orWhere('post_description', 'like', '%'.$query.'%')*/
                     ->orderBy($sort_by, $sort_type)
                     ->paginate(5);
-      return view('tareasbuscadorpaginado.pagination_data', compact('data'))->render();
+                    $categorias=Categoria::all();
+      return view('tareasbuscadorpaginado.pagination_data', compact('data','categorias'))->render();
      }
     }
 }
