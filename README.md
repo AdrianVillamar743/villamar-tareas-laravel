@@ -565,37 +565,3 @@ Barryvdh\DomPDF\ServiceProvider::class,
 Ahora, un poco más abajo busca un array llamado ‘aliases’ y agrega al final del array:
 
 'PDF' => Barryvdh\DomPDF\Facade::class,
-
-29.- Ahora crearemos un login usando la generación automática
-En la terminal escribimos 
-
-composer require laravel/ui
-
-Luego traemos la autenticación sin librerias como react, vue o bootstrap:
-php artisan ui:auth
-
-30.- Necesitamos agregar un atributo al modelo y la migración User para poder validar el tipo de usuario con un valor booleano. Es decir si admininistrador tendrá un valor de 1 o true y si es suscriptor se le asignará false o 0. Bajo ésta lógica implementemos lo siguiente:
-
-Models/User.php
-
-protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'tipo_usuario'
-    ];
-En la migración correspondiente a User tambien debemos declarar el atributo.
-
-public function up()
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('tipo_usuario')->default(0); // 0 = suscriptor && 1 = administrador
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
